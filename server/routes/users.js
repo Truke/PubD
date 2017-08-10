@@ -7,6 +7,7 @@ router.post('/login', user.login)
   .post('/register', user.register)
   .get('/checkOut', user.userVerify)
   .get('/query', user.query)
+  .get('/logout', user.logout)
 
 
 module.exports = router;

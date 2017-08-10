@@ -1,7 +1,5 @@
 <template>
 <div class="my_articles">
-    <div class="cover_bg"></div>
-    <div class="cover_fixed wrap clearfix"><h1 class="yellow fl">个人主页</h1></div>
     <template v-if="dataList[0].markedArticle == ''">
         <div class="nothing_word wrap">
             <p>这个人太懒，什么都没写过~</p>
@@ -9,8 +7,16 @@
     </template>
     <template v-else>
         <div style="padding: 20px 0 40px 0;" class="wrap clearfix">
+            <div class="user fl">
+                <div><img :src="dataList[0].thisUser.userImg"></div>
+                <p class="user_name">{{dataList[0].thisUser.userNickName}}</p>
+                <p class="tag">手记总数: {{dataList.length}}</p>
+                <p class="sub_tags">
+                    <span v-for="item in tagList" @click="swichArticles(item)">{{item[0].mainTag}}({{item.length}})</span>
+                </p>
+            </div>
             <template v-if="articlesBySubTag !== '' ">
-                <ul class="article_list fl">
+                <ul class="article_list fr">
                     <li v-for="item in articlesBySubTag">
                         <h2><router-link :to="{ name: 'article', params: { articleId: item._id }}">{{item.articleTitle}}</router-link></h2>
                         <h3>{{item.articleIntro}}</h3>
@@ -23,7 +29,7 @@
                 </ul>
             </template>
             <template v-else>
-                <ul class="article_list fl">
+                <ul class="article_list fr">
                     <li v-for="item in articleList">
                         <h2><router-link :to="{ name: 'article', params: { articleId: item._id }}">{{item.articleTitle}}</router-link></h2>
                         <h3>{{item.articleIntro}}</h3>
@@ -35,14 +41,7 @@
                     </li>
                 </ul>
             </template>
-            <div class="user fr">
-                <div><img :src="dataList[0].thisUser.userImg"></div>
-                <p class="user_name">{{dataList[0].thisUser.userNickName}}</p>
-                <p class="tag">手记总数: {{dataList.length}}</p>
-                <p class="sub_tags">
-                    <span v-for="item in tagList" @click="swichArticles(item)">{{item[0].mainTag}}({{item.length}})</span>
-                </p>
-            </div>
+            
         </div>
     </template>
     <transition name="fade">
@@ -203,6 +202,7 @@ export default {
 </script>
 <style lang="sass">
 .my_articles {
+    padding-top: 100px;
     background: #fff;
     .login_layer {
         .confirm_text {

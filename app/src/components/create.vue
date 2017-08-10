@@ -1,8 +1,7 @@
 <template>
 <div class="create_page">
-    <div class="cover_bg"></div>
-    <div class="cover_fixed wrap clearfix"><h1 class="yellow fl">{{mainTitle}}</h1></div>
     <div class="wrap create_detail">
+        <h1 class="yellow">{{mainTitle}}</h1>
         <div class="create_tag">
             <span class="title_left">标题</span><input type="" name="" v-model="articleTitle">
         </div>
@@ -559,6 +558,7 @@ export default {
 </script>
 <style lang="sass">
 .create_page {
+    padding-top: 100px;
     background: #fff;
     .login_layer {
         .insert_pic {

@@ -257,7 +257,6 @@ export default {
 .cover_bg {
     width: 100%;
     height: 294px;
-    background: #333;
 }
 .cover_fixed {
     margin-top: -100px;

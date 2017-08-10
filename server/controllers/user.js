@@ -39,6 +39,15 @@ const login = function *(next) {
   })
 }
 
+//登出
+const logout = function (next) {
+  const ctx = this;
+  ctx.body = {
+    msg: '退出成功',
+    state: true
+  }
+}
+
 //注册，添加用户头像
 const register = function *(next) {
   const ctx = this;
@@ -121,6 +130,7 @@ const query = function *(next) {
 
 module.exports = {
   login,
+  logout,
   register,
   query,
   userVerify

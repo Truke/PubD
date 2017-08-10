@@ -31,10 +31,21 @@ export default {
         //用户登录信息更新
         commit(types.USER_LOGIN, res.data)
         //存储token
-        localStorage.token = res.data.token;
+        localStorage.token = res.data.token
       } else {
         commit(types.LOGIN_JUDGE, false)
         commit(types.POP_LOGIN, true)
+      }
+    })
+  },
+  userLogout ({ commit }, opts) {
+    api.userLogout(opts).then(function (res) {
+      commit(types.SHOW_MSG, res.data)
+      if (res.data.state) {
+        commit(types.LOGIN_JUDGE, false)
+        localStorage.removeItem('token')
+      } else {
+        commit(types.LOGIN_JUDGE, true)
       }
     })
   },

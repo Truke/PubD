@@ -51,6 +51,9 @@ export default {
   userLogin (opts) {
     return axios.post('users/login', opts)
   },
+  userLogout (opts) {
+    return axios.get('users/logout')
+  },
   userRegister (opts) {
     return axios.post('users/register',opts)
   },

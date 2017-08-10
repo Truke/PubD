@@ -16,9 +16,7 @@
                 <router-link :to="{ name: 'personal', params: { userId: thisUser._id }}">
                     <img :src="thisUser.userImg">
                 </router-link>
-                <router-link :to="{ name: 'logout'}">
-                    退出
-                </router-link>
+                <span class="fr logout" @click="logout">退出</span>
             </div>
             <div class="search pr fr">
                 <div class="pa"></div>
@@ -65,6 +63,9 @@ export default {
               popIcon : false,
               popText : "请登录",
             };
+        },
+        logout: function() {
+            this.$store.dispatch('userLogout')
         }
     },
     mounted (){
@@ -154,7 +155,7 @@ export default {
             transition: 0.3s all ease-out;
             right: 0;
             top: 0;
-            width: 29px;
+            width: 180px;
             height: 29px;
             border-radius: 29px;
             border: 1px solid #cacaca;
@@ -170,10 +171,10 @@ export default {
             background: url(../../images/icon_search.png) no-repeat center;
         }
         input {
-            opacity: 0;
+            opacity: 1;
             transition: 0.3s all ease-out;
             top: 1px;
-            right: 25px;
+            right: 35px;
             // animation: searchOut 0.4s both;
             height: 25px;
             display: inline-block;
@@ -182,17 +183,6 @@ export default {
             border: none;
             font-size: 16px;
             width: 130px;
-        }
-    }
-    .search:hover {
-        div {
-            width: 180px;
-            right: 0;
-        }
-        input {
-            opacity: 1;
-            right: 35px;
-            z-index: 3;
         }
     }
     .login {
@@ -243,6 +233,10 @@ export default {
             height: 50px;
             border-radius: 50px;
             margin: 18px 0 0 10px;
+        }
+        .logout {
+            margin-left: 20px;
+            font-size:14px;
         }
     }
 }
