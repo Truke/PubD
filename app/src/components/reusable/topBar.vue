@@ -1,6 +1,5 @@
 <template>
 <div class="top_bar">
-    <div class="head_tag yellow_bg"></div>
     <div class="head_zone black3">
         <div class="wrap clearfix">
             <div class="logo fl">
@@ -23,14 +22,12 @@
                 <i class="pa"></i>
                 <input class="pa" type="" name="">
             </div>
-            <ul class="head_links clearfix fr">
+            <ul class="head_links clearfix fl">
                 <li class="fl">
                     <span><router-link to="/index">首页</router-link></span>
-                    <i class="spot_line"></i>
                 </li>
                 <li class="fl">
                     <span><router-link to="/query">分类索引</router-link></span>
-                    <i class="spot_line"></i>
                 </li>
                 <li class="fl">
                     <span v-if="loginJudge"><router-link to="/create">创建手记</router-link></span>
@@ -79,28 +76,22 @@ export default {
 </script>
 <style lang="sass">
 .top_bar {
-    position: absolute;
+    position: fixed;
     z-index: 3;
     width: 100%;
     top: 0;
     left: 0;
 }
-.head_tag {
-    width: 100%;
-    height: 7px;
-}
 .head_zone {
     width: 100%;
-    height: 87px;
-    background: #fff;
+    height: 50px;
+    background: #333;
     font-size: 0;
     .logo {
-        width: 90px;
         text-align: center;
         img {
             display: inline-block;
-            width: 70%;
-            margin: 10px 0 6px 0;;
+            width: 100%;
         }
         p {
             font-size: 14px;
@@ -110,15 +101,14 @@ export default {
         }
     }
     .head_links {
-        height: 87px;
-        line-height: 87px;
-        margin-right: 200px;
+        height: 50px;
+        line-height: 50px;
         span {
             display: inline-block;
             vertical-align: middle;
             cursor: pointer;
             padding: 0 35px;
-            font-size: 18px;
+            font-size: 14px;
             text-align: center;
             position: relative;
         }
@@ -144,7 +134,7 @@ export default {
         }
     }
     .search, .login {
-        margin-top: 28px;
+        margin-top: 10px;
         cursor: pointer;
     }
     .search {
@@ -160,6 +150,7 @@ export default {
             border-radius: 29px;
             border: 1px solid #cacaca;
             margin-left: -2px;
+            background-color: #fff;
         }
         i{
             display: inline-block;
@@ -210,9 +201,9 @@ export default {
             transition: 0.4s all ease-out;
             display: inline-block;
             vertical-align: middle;
-            font-size: 16px;
+            font-size: 14px;
             opacity: 0;
-            top: 4px;
+            top: 5px;
             left: 28px;
         }
     }
@@ -225,18 +216,22 @@ export default {
         }
     }
     .user_logined {
-        height: 87px;
-        line-height: 87px;
+        height: 50px;
+        line-height: 50px;
         font-size: 0;
         img {
-            width: 50px;
-            height: 50px;
+            width: 30px;
+            height: 30px;
             border-radius: 50px;
-            margin: 18px 0 0 10px;
+            margin: 10px 0 0 20px;
         }
         .logout {
             margin-left: 20px;
             font-size:14px;
+            cursor: default;
+            &:hover{
+              color:#ccc;
+            }
         }
     }
 }

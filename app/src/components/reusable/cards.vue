@@ -1,31 +1,32 @@
 <template>
 <div class="wrap">
-    <ul class="cards_layer clearfix">
-        <li class="cards"  v-for="(item,index) in articleList">
-            <router-link :to="{ name: 'article', params: { articleId: item._id }}">
-                <img class="card_banner" :src="item.coverImg">
-                <div class="text_content">
-                    <h2>{{item.articleTitle}}</h2>
-                    <p>{{item.articleIntro}}</p>
-                    <div class="user_zone">
-                        <template v-if="item.thisUser">
-                            <router-link :to="{ name: 'personal', params: { userId: item.thisUser._id }}"><img :src="item.thisUser.userImg">
-                            <h3>{{item.thisUser.userNikeName}}</h3>
-                            </router-link>
-                        </template>
-                        <template v-else>
-                            <img src="../../images/user.png">
-                            <h3>LRain</h3>
-                        </template>
-                        <span>{{item.mainTag}}<span class="line">|</span>{{timeHandle(item.timeStamp)}}</span>
-                    </div>
-                    <div class="tags_zone">
-                        <span  v-for="stuff in item.subTags">{{stuff}}</span>
-                    </div>
-                </div>
-            </router-link>
-        </li>
-    </ul>
+  <ul class="cards_layer clearfix">
+    <li class="cards citem" v-for="(item,index) in articleList">
+      <div class="citemtop">
+        <router-link :to="{ name: 'article', params: { articleId: item._id }}">
+          <img :src="item.coverImg" width="280" height="180">
+        </router-link>
+        <div class="citemtxt">
+          <router-link class="citemtitle" :to="{ name: 'article', params: { articleId: item._id }}">
+            {{item.articleTitle}}
+          </router-link>
+        </div>
+      </div>
+      <div class="citemqt">
+        <span class="yy-icon yy-view">view</span>
+        <span class="yy-icon yy-comment">comment</span>
+      </div>
+      <div class="citemqt citemfoot">
+        <div class="citemzl">
+          <router-link class="citemfimg" :to="{ name: 'personal', params: { userId: item.thisUser._id }}">
+            <img :src="item.thisUser.userImg" width="24" height="24">
+            <span class="txtellipsis">{{item.thisUser.userNickName}}</span>
+          </router-link>
+        </div>
+        <span class="fcfield">（{{item.mainTag}} {{timeHandle(item.timeStamp)}}）</span>
+      </div>
+    </li>
+  </ul>
 </div>
 </template>
 
@@ -42,91 +43,120 @@ export default {
 </script>
 <style lang="sass">
 .cards_layer {
-    margin: 0 -28px -28px 0;
+  margin: 0 -28px -28px 0;
 }
-.cards {
-    transition: 0.2s box-shadow ease-out;
-    width: 348px;
-    height: 348px;
-    float: left;
-    margin: 0 28px 28px 0;
-    font-size: 0;
+.citem {
+  transition: 0.2s box-shadow ease-out;
+  width: 280px;
+  height: 270px;
+  float: left;
+  margin: 0 20px 46px 0;
+  font-size: 12px;
+  background-color: #fff;
+  .citemtop{
+    width: 280px;
+    height:180px;
     position: relative;
+    display:block;
     overflow: hidden;
-    .card_banner {
-        width: 100%;
-        height: 184px;
+    img{
+      width: 100%;
+      height: 100%;
+      background-color: #bfc1c2;
     }
-    .text_content {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        padding: 0 28px;
-        width: 292px;
-        height: 210px;
-        background: #fff;
-        transition: 0.2s transform ease-out;
-        transform: translateY(43px);
-        h2, p{
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        h2 {
-            font-size: 24px;
-            color: #333;
-            font-weight: 100;
-            margin: 22px 0 5px 0;
-        }
-        p {
-            font-size: 14px;
-            color: #999;
-        }
+  }
+  .citemtxt{
+    background-color: #fff;
+    padding:10px 20px;
+    position: absolute;
+    width: 240px;
+    height:20px;
+    bottom:-60px;
+    transition: bottom ease .3s;
+  }
+  .citemtitle {
+    width: 240px;
+    display: block;
+    color: #3a3a3a;
+    font-size: 16px;
+    font-weight: 500;
+    height: 22px;
+    overflow: hidden;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+  }
+  /* .citemtc{
+    margin-top: 8px;
+    height: 20px;
+    line-height: 20px;
+    .yy-time{
+      width: auto;
+      text-indent: 20px;
+      margin-left: -4px;
+      color: #a0a0a0
     }
-    .user_zone {
-        margin: 20px 0;
-        img, h3, span {
-            display: inline-block;
-            vertical-align: middle;
+    .ccolor{
+      float: right;
+      margin-top: 8px;
+      a{
+        width: 23px;
+        display: block;
+        height: 4px;
+        border-style: solid;
+        border-width: 1px;
+        margin-left: 1px;
+        float: left;
+        transition: all ease .2s;
+        &:hover{
+          transform: scale(1.4)
         }
-        img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50px;
-        }
-        h3 {
-            font-size: 18px;
-            margin: 0 10px;
-            color: #333;
-            font-weight: 100;
-        }
-        span {
-            font-size: 12px;
-            color: #999;
-        }
-        .line {
-            margin: 0 5px;
-            vertical-align: 0;
-        }
+      }
     }
-    .tags_zone {
-        span {
-            display: inline-block;
-            vertical-align: middle;
-            font-size: 12px;
-            padding: 3px 10px;
-            margin-right: 10px;
-            background: #ffe400;
-            color: #666;
-        }
+  } */
+  .citemqt{
+    width: auto;
+    height: 22px;
+    padding: 12px 20px 8px 20px;
+  }
+  .citemfoot {
+    padding-bottom: 11px;
+    border-top: #f2f2f2 1px solid;
+    margin-top: 3px;
+    a.citemfimg{
+      color: #828282;
+      line-height: 24px;
+      img{
+        margin-right: 8px;
+        position: relative;
+        top: -1px;
+        float: left;
+      }
+      span{
+        max-width: 50px;
+        height: 24px;
+        display: inline-block;
+      }
     }
-}
-.cards:hover {
-    box-shadow: 0 4px 40px 0 rgba(0,0,0,.1);
-    -webkit-box-shadow: 0 4px 40px 0 rgba(0,0,0,.1);
-    .text_content {
-        transform: translateY(0);
+    span{
+      margin-left: 10px;
+      color: #C0C0C0
     }
+    span.fcfield{
+      vertical-align: top;
+      line-height: 24px;
+      height: 24px
+    }
+  }
+  .citemzl{
+    display: inline;
+    position: relative;
+  }
+  &:hover{
+    .citemtxt{
+      bottom:0;
+    }
+  }
 }
 
 </style>

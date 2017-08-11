@@ -1,20 +1,23 @@
 <template>
 <div class="create_page">
     <div class="wrap create_detail">
-        <h1 class="yellow">{{mainTitle}}</h1>
+        <h1 class="create_h1">{{mainTitle}}</h1>
         <div class="create_tag">
             <span class="title_left">标题</span><input type="" name="" v-model="articleTitle">
         </div>
         <div class="create_tag">
             <span class="title_left">简介</span><input type="" name="" v-model="articleIntro">
         </div>
-        <div class="create_tag">
+        <div class="create_tag heiauto">
             <span class="title_left">封面图</span>
+            <div class="simgarea">
+                <img :src="coverPicSrc" alt="" width="280" height="180">
+            </div>
             <div v-if="isEdit" class="pr unclickable">上传图片</div>
             <form v-else class="pr btn_hover">
                 <p class="yellow_bg"></p>
                 <div class="pa">上传图片</div>
-                <input @click="picUpload" class="pa upload" type="file" name="fileUpload">
+                <input @click="picUpload" class="pa upload" type="file" name="fileUpload" @change="changeCover">
             </form>
             <span class="pic_upload_msg">{{ coverPicUploadMsg }}</span>
         </div>
@@ -82,6 +85,7 @@
 </template>
 
 <script>
+import coverPicSrc from "../images/itemi.png";
 import highlight from 'highlight.js'
 import marked from 'marked'
 export default {
@@ -100,6 +104,7 @@ export default {
             clickAble : true,
 
             //封面图片上传控制
+            coverPicSrc: coverPicSrc,
             coverPicUploadMsg : "*尺寸348x184，小于1M",
             coverPicVal : "",
             coverPicSizeOverflow : false,
@@ -529,6 +534,14 @@ export default {
         picUpload : function(){
             this.coverPicUploadMsg = "*尺寸348x184，小于1M";
         },
+        changeCover: function(e){
+          var e = e || window.event,
+              input = e.target || e.srcElement,
+              files = input.files;
+          if(files.length){
+            this.coverPicSrc = URL.createObjectURL(files[0]);
+          }
+        },
         //主副标签切换控件
         swithMainTag : function(index){
             this.mainTagDefault = index;
@@ -558,8 +571,7 @@ export default {
 </script>
 <style lang="sass">
 .create_page {
-    padding-top: 100px;
-    background: #fff;
+    margin-top: 100px;
     .login_layer {
         .insert_pic {
             top: 0;
@@ -571,12 +583,23 @@ export default {
 }
 .create_detail {
     // width: 1010px;
-    // background: #fff;
-    padding: 45px 0;
-    padding-bottom: 90px;
+    background: #fff;
+    padding: 0 20px 45px;
+    margin-bottom: 90px;
+    .create_h1{
+        font-size: 30px;
+        height: 70px;
+        line-height: 70px;
+        font-weight: normal;
+        padding:10px 50px;
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 30px;
+        color:#757575;
+    }
     .create_tag {
         height: 40px;
         margin-bottom: 25px;
+        padding-left: 30px;
         font-size: 0;
         span, input, div {
             display: inline-block;
@@ -584,16 +607,16 @@ export default {
         }
         .title_left {
             width: 75px;
-            font-size: 18px;
-            color: #333;
+            font-size: 14px;
+            color: #757575;
             text-align: left;
         }
         input {
             outline: none;
             margin: 0;
             padding: 0;
-            border: 1px solid #999;
-            width: 256px;
+            border: 1px solid #e0e0e0;
+            width: 500px;
             height: 38px;
             font-size: 14px;
             padding: 0 10px;
@@ -607,7 +630,7 @@ export default {
         .tag_btn {
             font-size: 16px;
             padding: 5px 10px 6px 10px;
-            color: #999;
+            color: #757575;
             margin-right: 5px;
             cursor: pointer;
         }
@@ -619,6 +642,14 @@ export default {
             background: #ffe400;
         }
     }
+    .create_tag.heiauto{
+      height: auto;
+      .simgarea{
+        background: url(../images/simgarea.jpg);
+        width: 280px;
+        min-height: 180px;
+      }
+    }
     .submit_btn {
         width: 162px;
         height: 50px;
@@ -628,7 +659,7 @@ export default {
         font-size: 18px;
         color: #ffe400;
         text-align: center;
-        margin: 45px 0 10px 0;
+        margin: 45px auto 0;
     }
     .main_tags, .sub_tags, .my_tags {
         margin-bottom: 15px;
@@ -695,19 +726,19 @@ export default {
 }
 .create_content {
     width: 100%;
-    border-top: 1px solid #999;
-    border-bottom: 1px solid #999;
-    border-right: 1px solid #999;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
     margin-bottom: 25px;
     .write_zone, .watch_zone {
         width: 50%;
         margin-left: -1px;
-        border-left: 1px solid #999;
+        border-left: 1px solid #e0e0e0;
         height: 400px;
         textarea, .watch_text{
             padding: 20px;
             color: #666;
-            font-size: 16px;
+            font-size: 14px;
             text-align: justify;
             width: 464px;
             height: 314px;
@@ -715,6 +746,7 @@ export default {
             outline: none;
             resize: none;
             line-height: 24px;
+            font-family: "Microsoft YaHei";
         }
         .watch_text {
             font-size: 14px;
@@ -728,8 +760,8 @@ export default {
     .create_title {
         height: 45px;
         line-height: 45px;
-        border-bottom: 1px solid #999;
-        background: #ffe400;
+        border-bottom: 1px solid #e0e0e0;
+        background: #f6f6f6;
         span {
             display: inline-block;
             vertical-align: middle;

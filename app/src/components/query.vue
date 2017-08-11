@@ -216,7 +216,7 @@ export default {
             cursor: pointer;
         }
         .tag_btn:hover {
-            color: #fff;
+            color: #757575;
         }
         .tag_active {
             color: #333;

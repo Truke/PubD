@@ -1,34 +1,13 @@
 <template>
     <div class="index">
-        <div class="banner pr" :style="{backgroundImage:'url(' + banner + ')'}">
-            <div class="middle_content pa">
-                <div class="wrap pa yellow_bg clearfix">
-                    <router-link :to="{ name: 'article', params: { articleId: articles[0]._id }}">
-                        <div class="middle_img pa">
-                            <img :src="articles[0].coverImg">
-                            <div class="img_cover pa">
-                                <div class="kkk"></div>
-                                <div class="text_content">
-                                    <h2>最新动态</h2>
-                                    <div class="yellow_bg"></div>
-                                    <h4>{{coverTime}}</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </router-link>
-                    <div class="middle_text fr">
-                        <div class="kkk"></div>
-                        <div class="text clearfix">
-                            <p><i></i><span>{{articles[0].articleTitle}}</span></p>
-                            <p class="main_text">{{coverText}}</p>
-                            <div class="spot fr"></div>
-                        </div>
-                    </div>
-                </div>
+        <div class="sooptions">
+            <div class="automw wrap">
+              df
             </div>
         </div>
+        
         <div class="index_list">
-            <cards :articleList="articleList"></cards>
+            <cards :articleList="articles"></cards>
         </div>
     </div>
 </template>
@@ -41,53 +20,6 @@ export default {
     // replace: false,
     data () {
         return {
-            banner : banner,
-            coverTime : "",
-        }
-    },
-    watch : {
-        articles(){
-            var thisTime = new Date(parseInt(this.articles[0].timeStamp) * 1000);
-            var thiMonth = thisTime.getMonth() + '',
-                thisDay = thisTime.getDay();
-            switch (thiMonth) {
-                case '1':
-                this.coverTime = "Jan." + thisDay
-                break
-                case '2':
-                this.coverTime = "Feb." + thisDay
-                break
-                case '3':
-                this.coverTime = "Mar." + thisDay
-                break
-                case '4':
-                this.coverTime = "Apr." + thisDay
-                break
-                case '5':
-                this.coverTime = "May." + thisDay
-                break
-                case '6':
-                this.coverTime = "Jun." + thisDay
-                break
-                case '7':
-                this.coverTime = "Jul." + thisDay
-                break
-                case '8':
-                this.coverTime = "Aug." + thisDay
-                break
-                case '9':
-                this.coverTime = "Sept." + thisDay
-                break
-                case '10':
-                this.coverTime = "Oct." + thisDay
-                break
-                case '11':
-                this.coverTime = "Nov." + thisDay
-                break
-                case '12':
-                this.coverTime = "Dec." + thisDay
-                break
-            }
         }
     },
     components : {
@@ -112,117 +44,18 @@ export default {
 }
 </script>
 <style lang="sass">
-.banner {
-    height: 784px;
-    background: no-repeat center;
-    background-size: cover;
-    font-size: 0;
-    .middle_content {
-        bottom: 0;
-        left: 0;
-        height: 200px;
-        width: 100%;
-        background: rgba(27,26,21,0.96);
-        .wrap {
-            height: 316px;
-            bottom: 0;
-            left: 50%;
-            margin-left: -550px;
-        }
-        .middle_img {
-            width: 550px;
-            height: 320px;
-            font-size: 0;
-            // margin: -53px 0 0 28px;
-            bottom: 28px;
-            left: 28px;
-            background: #333;
-        }
-        img {
-            width: 100%;
-            height: 100%;
-        }
-    }
-    .img_cover {
-        width: 100%;
-        height: 100%;
-        bottom: 0;
-        left: 0;
-        text-align: center;
-        background: rgba(0,0,0,0.7);
-        .text_content {
-            display: inline-block;
-            vertical-align: middle;
-            text-align: center;
-            h2 {
-                font-size: 24px;
-                color: #fff;
-                font-weight: normal;
-            }
-            div {
-                height: 5px;
-                width: 126px;
-                margin: 20px 0;
-            }
-            h4 {
-                font-size: 18px;
-                color: #727272;
-                font-weight: normal;
-            }
-        }
-    }
-    .middle_text {
-        padding: 0 55px;
-        width: 412px;
-        height: 100%;
-        .text {
-            display: inline-block;
-            vertical-align: middle;
-        }
-        i,span {
-            display: inline-block;
-            vertical-align: middle;
-        }
-        span {
-            max-width: 360px;
-            font-size: 36px;
-            color: #333;
-            vertical-align: -15px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        p {
-            font-size: 16px;
-            color: #666;
-        }
-        .main_text {
-            margin: 20px 0 10px 0;
-        }
-        .fr {
-            width: 46px;
-            height: 40px;
-            background: url(../images/icon_attract.png) no-repeat center;
-            transform: rotateZ(180deg);
-        }
-        i {
-            width: 46px;
-            height: 40px;
-            margin-right: 5px;
-            background: url(../images/icon_attract.png) no-repeat center;
-        }
-        .main_text{
-            display: -webkit-box!important;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            word-break: break-all;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 6;
-            text-align: justify;
-        }
-    }
+.sooptions {
+  position: fixed;
+  width:100%;
+  top:50px;
+  height: 40px;
+  padding: 10px 0;
+  background-color: #f7f8f8;
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+  z-index: 3;
 }
 .index_list {
+  margin-top:100px;
     padding: 60px 0;
 }
 //common sass
